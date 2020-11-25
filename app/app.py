@@ -6,7 +6,10 @@ import pydeck as pdk
 from datetime import date
 
 # SETTING PAGE CONFIG TO WIDE MODE
-st.set_page_config(layout="wide")
+st.set_page_config(
+        layout="wide",
+        page_title="Emerging Areas"
+        )
 
 # LOADING DATA
 DATE_TIME = "observation_start_date"
@@ -149,3 +152,4 @@ with row3_2:
     chart_data = pd.DataFrame(sub_selection_inflow, columns=['total_net_flow'])
     st.line_chart(chart_data, height=320)
 
+st.slider
