@@ -126,11 +126,11 @@ sub_selection['income_diff'] = sub_selection['income_diff'].astype('int32')
 
 with row2_2:
     st.write("Top 10 performing tract areas accumulated over the period")
-    st.write(sub_selection.head(10))
+    st.write(sub_selection[['income_diff','total_net_flow']].head(10))
 
 with row2_3:
     st.write("Bottom 10 performing tract areas accumulated over the period")
-    st.write(sub_selection.tail(10))
+    st.write(sub_selection[['income_diff','total_net_flow']].tail(10))
 
 row3_1, row3_2 = st.beta_columns((1,1)) 
 
