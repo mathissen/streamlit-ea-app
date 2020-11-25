@@ -5,7 +5,7 @@ To run do
 
 ```pipenv install```
 
-```streamlit app/app.py```
+```streamlit run app/app.py```
 
 
 ## Workshop
