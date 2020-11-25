@@ -63,7 +63,7 @@ def map(data, lat, lon, zoom):
 row1_1, row1_2 = st.beta_columns((2,3))
 
 with row1_1:
-    st.title("Unacast - Emerging Areas - Miami Area 2019")
+    st.title("# Unacast - Emerging Areas - Miami Area 2019")
     month_selected = st.slider("Choose month", 1, 11,4)
     
 my_expander = st.beta_expander("Adjust settings", expanded=False)
@@ -136,15 +136,15 @@ row3_1, row3_2 = st.beta_columns((1,1))
 
 with row3_1:
     st.write("Inflow and outflow of people in observed area")
-    sub_selection_inflow = filtered[['observation_start_date', 'inflow', 'outflow']]
-    sub_selection_inflow= sub_selection_inflow.groupby(by=[DATE_TIME]).sum().sort_values(by=['observation_start_date'],ascending=False)
+    sub_selection_inflow = filtered[[DATE_TIME, 'inflow', 'outflow']]
+    sub_selection_inflow= sub_selection_inflow.groupby(by=[DATE_TIME]).sum().sort_values(by=[DATE_TIME],ascending=False)
     chart_data = pd.DataFrame(sub_selection_inflow, columns=['inflow', 'outflow'])
     st.line_chart(chart_data, height=320)
 
 with row3_2:
     st.write("Accumulated net flow of people in observed area")
-    sub_selection_inflow = filtered[['observation_start_date','total_net_flow']]
-    sub_selection_inflow= sub_selection_inflow.groupby(by=[DATE_TIME]).sum().sort_values(by=['observation_start_date'],ascending=False)
+    sub_selection_inflow = filtered[[DATE_TIME,'total_net_flow']]
+    sub_selection_inflow= sub_selection_inflow.groupby(by=[DATE_TIME]).sum().sort_values(by=[DATE_TIME],ascending=False)
     sub_selection_inflow= sub_selection_inflow.loc[::-1, 'total_net_flow'].cumsum()[::-1]
     chart_data = pd.DataFrame(sub_selection_inflow, columns=['total_net_flow'])
     st.line_chart(chart_data, height=320)
