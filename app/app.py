@@ -49,7 +49,7 @@ def map(data, lat, lon, zoom):
                 data=data,
                 get_position=["lon", "lat"],
                 radius=1000,
-                elevation_scale=0.001,
+                elevation_scale=0.0003,
                 elevation_range=[0, 1000],
                 pickable=True,
                 extruded=True,
@@ -64,7 +64,7 @@ row1_1, row1_2 = st.beta_columns((2,3))
 
 with row1_1:
     st.title("Unacast - Emerging Areas - Miami Area 2019")
-    month_selected = st.slider("Choose month", 1, 11,2)
+    month_selected = st.slider("Choose month", 1, 11,4)
     
 my_expander = st.beta_expander("Adjust settings", expanded=False)
 
@@ -117,7 +117,7 @@ with row2_1:
 
 # FILTERING DATA FOR THE CHART
 filtered = data_accumulated[
-    (data_accumulated[DATE_TIME].dt.date < date(2019,month_selected+1,1))
+    (data_accumulated[DATE_TIME].dt.date <= date(2019,month_selected+1,1))
     ]
 
 sub_selection = filtered[['area_id', 'income_diff', 'inflow', 'outflow', 'total_net_flow']]
@@ -138,14 +138,14 @@ with row3_1:
     st.write("Inflow and outflow of people in observed area")
     sub_selection_inflow = filtered[['observation_start_date', 'inflow', 'outflow']]
     sub_selection_inflow= sub_selection_inflow.groupby(by=[DATE_TIME]).sum().sort_values(by=['observation_start_date'],ascending=False)
-    sub_selection_inflow = sub_selection_inflow.cumsum()
     chart_data = pd.DataFrame(sub_selection_inflow, columns=['inflow', 'outflow'])
     st.line_chart(chart_data, height=320)
 
 with row3_2:
-    st.write("Total net inflow of people in observed area")
+    st.write("Accumulated net flow of people in observed area")
     sub_selection_inflow = filtered[['observation_start_date','total_net_flow']]
     sub_selection_inflow= sub_selection_inflow.groupby(by=[DATE_TIME]).sum().sort_values(by=['observation_start_date'],ascending=False)
-    sub_selection_inflow = sub_selection_inflow.cumsum()
+    sub_selection_inflow= sub_selection_inflow.loc[::-1, 'total_net_flow'].cumsum()[::-1]
     chart_data = pd.DataFrame(sub_selection_inflow, columns=['total_net_flow'])
     st.line_chart(chart_data, height=320)
+
