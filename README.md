@@ -7,7 +7,7 @@ To run do
 
 ```streamlit run app/app.py```
 
-![alt text](https://github.com/mathissen/streamlit-ea-app/blob/master/img/em_app.jpg?raw=true)
+![alt text](https://github.com/mathissen/streamlit-ea-app/blob/master/img/ea_app.PNG?raw=true)
 
 ## Workshop
 
