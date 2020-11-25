@@ -2,8 +2,12 @@
 Simple Emerging Areas App using streamlit
 
 To run do 
+
 ```pipenv install```
+
 ```streamlit app/app.py```
+
+
 ## Workshop
 
 Example apps and documentation :
