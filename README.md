@@ -21,3 +21,6 @@ https://www.streamlit.io/gallery
 Introduction to streamlit from the people behind it: 
 
 https://www.youtube.com/watch?v=R2nr1uZ8ffc&ab_channel=Streamlit
+
+Collection of sample apps
+https://github.com/MarcSkovMadsen/awesome-streamlit
